@@ -51,6 +51,15 @@ dbt/
 | merchant_lat, merchant_lon | Float64 | Координаты мерчанта |
 | target | UInt8 | Признак фрода (0/1) |
 
+В рамках проекта реализовано 4 витрины:
+- mart_daily_state_metrics
+- mart_fraud_by_category
+- mart_fraud_by_state
+- mart_customer_risk_profile
+
+#### 🛠Версии 
+- dbt-core `1.10.15`
+- dbt-clickhouse `1.9.6`
 ---
 
 ## 🚀Команды для запуска
