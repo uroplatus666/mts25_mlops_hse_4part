@@ -34,8 +34,6 @@ dbt/
 
 ---
 
----
-
 ## Схема данных (source)
 
 Таблица `transactions_db.transactions`:
@@ -58,6 +56,20 @@ dbt/
 ## 🚀Команды для запуска
 
 ```bash
+git clone https://github.com/uroplatus666/mts25_mlops_hse_4part.git
+cd mts25_mlops_hse_4part
+```
+переименуйте `mts25_mlops_hse_4part` в dbt 
+В [profiles.yml](profiles.yml) укажите свои данные БД ClickHouse и нужную `schema`, у меня это:
+- `type`: clickhouse
+- `schema`: transactions_db
+- `host`: localhost
+- `port`: 9000
+- `user`: click
+- `password`: click
+Подробнее связка Kafka-ClickHouse и загрузка туда данных рассмотрена и протестирована [в этом репозитории](https://github.com/uroplatus666/mts25_mlops_hse_3part)
+
+```bash
 cd dbt/
 
 # Установка зависимостей
@@ -78,6 +90,8 @@ dbt docs generate && dbt docs serve
 # Полный цикл
 dbt deps && dbt seed && dbt run && dbt test
 ```
-
+### test logs
 ![test logs](images/test_logs.jpg)
+
+### DAG file
 ![DAG file](images/DAG.jpg)
