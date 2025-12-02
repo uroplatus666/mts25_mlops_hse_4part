@@ -1,0 +1,12 @@
+clickhouse_profile:
+  target: dev
+  outputs:
+    dev:
+      type: clickhouse
+      schema: transactions_db
+      host: localhost
+      port: 9000
+      user: click
+      password: click
+      secure: false
+      driver: native

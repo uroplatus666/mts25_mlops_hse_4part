@@ -1,0 +1,100 @@
+version: 2
+
+models:
+  - name: mart_daily_state_metrics
+    description: Дневные метрики по штатам.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - transaction_date
+              - us_state
+    columns:
+      - name: transaction_date
+        tests:
+          - not_null
+      - name: us_state
+        tests:
+          - not_null
+      - name: transaction_count
+      - name: total_amount
+      - name: avg_amount
+      - name: p95_amount
+      - name: large_tx_count
+      - name: large_tx_share
+      - name: fraud_count
+      - name: fraud_rate
+
+  - name: mart_fraud_by_category
+    description: Анализ фрода по категориям.
+    columns:
+      - name: category_id
+        description: Категория.
+        tests:
+          - unique
+          - not_null
+      - name: transaction_count
+        description: Количество транзакций.
+      - name: fraud_count
+        description: Количество фродов.
+      - name: fraud_rate
+        description: Доля фрода (%).
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              arguments:
+                min_value: 0
+                max_value: 100
+      - name: total_amount
+        description: Сумма транзакций.
+      - name: fraud_amount
+        description: Сумма фродов.
+
+  - name: mart_fraud_by_state
+    description: Географический анализ фрода.
+    columns:
+      - name: us_state
+        description: Штат.
+        tests:
+          - unique
+          - not_null
+      - name: unique_customers
+        description: Уникальные клиенты.
+      - name: unique_merchants
+        description: Уникальные мерчанты.
+      - name: fraud_rate
+        description: Доля фрода (%).
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              arguments:
+                min_value: 0
+                max_value: 100
+      - name: total_amount
+        description: Сумма транзакций.
+      - name: fraud_amount
+        description: Сумма фродов.
+
+  - name: mart_customer_risk_profile
+    description: Профиль риска клиентов.
+    columns:
+      - name: customer_name
+        description: Имя клиента.
+        tests:
+          - unique
+          - not_null
+      - name: transaction_count
+        description: Количество транзакций.
+      - name: fraud_rate
+        description: Доля фрода (%).
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              arguments:
+                min_value: 0
+                max_value: 100
+      - name: avg_amount
+        description: Средний чек.
+      - name: risk_level
+        description: Уровень риска (HIGH/MEDIUM/LOW).
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['HIGH', 'MEDIUM', 'LOW']

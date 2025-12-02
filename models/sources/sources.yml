@@ -1,0 +1,35 @@
+version: 2
+
+sources:
+  - name: transactions_db
+    schema: transactions_db
+    tables:
+      - name: transactions
+        description: Сырые данные о транзакциях с признаком фрода.
+        columns:
+          - name: transaction_time
+            description: Время транзакции.
+          - name: merch
+            description: Мерчант.
+          - name: cat_id
+            description: Категория транзакции.
+          - name: amount
+            description: Сумма транзакции.
+          - name: name_1
+            description: Имя клиента.
+          - name: name_2
+            description: Фамилия клиента.
+          - name: gender
+            description: Пол клиента (M/F).
+          - name: us_state
+            description: Штат США.
+          - name: lat
+            description: Широта клиента.
+          - name: lon
+            description: Долгота клиента.
+          - name: merchant_lat
+            description: Широта мерчанта.
+          - name: merchant_lon
+            description: Долгота мерчанта.
+          - name: target
+            description: Признак фрода (0/1).

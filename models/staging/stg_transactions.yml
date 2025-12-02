@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: stg_transactions
+    description: Очищенные и нормализованные данные о транзакциях.
+    columns:
+      - name: transaction_time
+        description: Время транзакции.
+        tests:
+          - not_null
+
+      - name: merchant
+        description: Мерчант.
+        tests:
+          - not_null
+
+      - name: category_id
+        description: Категория транзакции.
+        tests:
+          - not_null
+
+      - name: amount
+        description: Сумма транзакции.
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 100000
+
+      - name: first_name
+        description: Имя клиента.
+
+      - name: last_name
+        description: Фамилия клиента.
+
+      - name: gender
+        description: Пол клиента.
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['M', 'F']
+
+      - name: us_state
+        description: Штат США.
+        tests:
+          - not_null
+
+      - name: customer_lat
+        description: Широта клиента.
+
+      - name: customer_lon
+        description: Долгота клиента.
+
+      - name: merchant_lat
+        description: Широта мерчанта.
+
+      - name: merchant_lon
+        description: Долгота мерчанта.
+
+      - name: is_fraud
+        description: Признак фрода.
+        tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+      - name: amount_segment
+        description: Сегмент суммы (использует макрос).
+
+      - name: transaction_date
+        description: Дата транзакции.
+
+      - name: transaction_hour
+        description: Час транзакции.
+
+      - name: day_of_week
+        description: День недели.
