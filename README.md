@@ -59,7 +59,6 @@ dbt/
 git clone https://github.com/uroplatus666/mts25_mlops_hse_4part.git
 cd mts25_mlops_hse_4part
 ```
-переименуйте `mts25_mlops_hse_4part` в dbt 
 В [profiles.yml](profiles.yml) укажите свои данные БД ClickHouse и нужную `schema`, у меня это:
 - `type`: clickhouse
 - `schema`: transactions_db
@@ -70,6 +69,7 @@ cd mts25_mlops_hse_4part
 Подробнее связка Kafka-ClickHouse и загрузка туда данных рассмотрена и протестирована [в этом репозитории](https://github.com/uroplatus666/mts25_mlops_hse_3part)
 
 ```bash
+# переименуйте `mts25_mlops_hse_4part` в dbt 
 cd dbt/
 
 # Установка зависимостей
